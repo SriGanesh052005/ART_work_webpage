@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Artists - Artisan</title>
+    <!-- Google Fonts: Outfit for modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="artists-page">
+    <!-- Navbar (simplified for subpage) -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Artisan.</a>
+            <div class="nav-links">
+                <a href="index.html#categories">Categories</a>
+                <a href="#" class="active">Discover Artists</a>
+            </div>
+            <a href="login.html" class="btn btn-primary login-btn">Seller Login</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">Discover Creators</h1>
+        <p class="page-subtitle" id="categorySubtitle">Showing top artists across all categories.</p>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <span>Filter by:</span>
+            <select id="categoryFilter" class="modern-select">
+                <option value="all">All Categories</option>
+                <!-- Filled dynamically by JS -->
+            </select>
+        </div>
+    </header>
+
+    <!-- Artists Grid -->
+    <section class="artists-section">
+        <div class="artist-grid" id="artistGrid">
+            <!-- Artist cards injected by JS -->
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        // Specific init for artists page
+        document.addEventListener('DOMContentLoaded', () => {
+            initArtistsPage();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Profile - Artisan</title>
+    <!-- Google Fonts: Outfit for modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific profile styles that don't need to bloat the main CSS */
+        .profile-header {
+            padding: 8rem 2rem 0;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .profile-banner-large {
+            height: 300px;
+            border-radius: 24px;
+            margin-bottom: -100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-details {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 120px 3rem 4rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+        }
+
+        .profile-avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 6px solid var(--bg-color);
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            color: var(--secondary-color);
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-item {
+            aspect-ratio: 1;
+            background: var(--surface-color-hover);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .commission-box {
+            background: rgba(109, 40, 217, 0.1);
+            border: 1px solid rgba(109, 40, 217, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .reviews-section {
+            margin-top: 5rem;
+            text-align: left;
+            border-top: 1px solid var(--border-color);
+            padding-top: 3rem;
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-stars {
+            color: #fbbf24;
+        }
+
+        .review-form {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: #fff;
+            font-family: var(--font-family);
+            margin-bottom: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body class="profile-page">
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Artisan.</a>
+            <div class="nav-links">
+                <a href="index.html#categories">Categories</a>
+                <a href="artists.html">Discover Artists</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="profile-header">
+        <div class="profile-banner-large" id="profileBanner"></div>
+        <div class="profile-details">
+            <img src="" alt="Avatar" class="profile-avatar" id="profileAvatar">
+            <h1 class="profile-name" id="profileName">Loading...</h1>
+            <div class="profile-title" id="profileCategory">Specialty</div>
+
+            <p id="profileDesc"
+                style="color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem; line-height: 1.8;">
+                Loading description...
+            </p>
+
+            <div class="commission-box">
+                <h3 style="margin-bottom: 1rem;">Ready to Commission?</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Connect with the artist directly to discuss
+                    pricing, timelines, and ideas.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <a href="#" id="waLink" class="btn btn-glow" target="_blank">Contact via WhatsApp</a>
+                    <a href="#" id="emailLink" class="btn btn-secondary">Contact via Email</a>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 4rem; text-align: left; font-size: 1.5rem; margin-bottom: 1.5rem;">Portfolio</h3>
+            <div class="portfolio-grid" id="portfolioGrid">
+                <!-- Portfolio mocked via JS -->
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="reviews-section">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Customer Reviews</h3>
+                <div id="reviewsList">
+                    <!-- Default mock review -->
+                    <div class="review-card">
+                        <div class="review-header">
+                            <strong>Anonymous Collector</strong>
+                            <span class="review-stars">★★★★★</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Absolutely stunning work! The artist
+                            perfectly captured my vision and delivered ahead of schedule. Highly recommend commissioning
+                            them!</p>
+                    </div>
+                </div>
+
+                <!-- Leave a Review Form -->
+                <div class="review-form" id="reviewFormContainer">
+                    <h4 style="margin-bottom: 1rem;">Leave a Review</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Purchased an artwork?
+                        Help other customers by sharing your experience.</p>
+                    <form onsubmit="submitReview(event)">
+                        <select id="reviewRating" class="form-control" required style="width: auto;">
+                            <option value="5">★★★★★ (5/5)</option>
+                            <option value="4">★★★★☆ (4/5)</option>
+                            <option value="3">★★★☆☆ (3/5)</option>
+                            <option value="2">★★☆☆☆ (2/5)</option>
+                            <option value="1">★☆☆☆☆ (1/5)</option>
+                        </select>
+                        <textarea id="reviewText" class="form-control" placeholder="Write your review here..." rows="4"
+                            required style="resize: vertical;"></textarea>
+                        <button type="submit" class="btn btn-glow">Post Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const artistId = parseInt(urlParams.get('id')) || 1;
+
+            // Re-using artists array from script.js (they share scope here)
+            const artist = artists.find(a => a.id === artistId);
+
+            if (artist) {
+                document.getElementById('profileName').textContent = artist.name;
+                document.getElementById('profileCategory').textContent = categories.find(c => c.id === artist.category)?.name || artist.category;
+                document.getElementById('profileDesc').textContent = artist.desc + " I have been creating custom pieces for over 5 years. I love working with clients to bring their vision to life. Please contact me directly to get started!";
+                document.getElementById('profileAvatar').src = artist.avatar;
+
+                // Set banner
+                document.getElementById('profileBanner').style.cssText = getBannerGradient(artist.banner);
+
+                // Set Commission Links (Mocking real links for demo)
+                const encodedMsg = encodeURIComponent("Hello! I saw your profile on Artisan and would like to commission an artwork.");
+                document.getElementById('waLink').href = `https://wa.me/1234567890?text=${encodedMsg}`;
+                document.getElementById('emailLink').href = `mailto:artist@example.com?subject=Commission Request&body=${encodedMsg}`;
+
+                // Mock Portfolio Generation
+                const portfolioGrid = document.getElementById('portfolioGrid');
+                for (let i = 1; i <= 6; i++) {
+                    portfolioGrid.innerHTML += `
+                        <div class="portfolio-item">
+                            <img src="https://picsum.photos/seed/${artistId}${i}/400/400" alt="Artwork ${i}">
+                        </div>
+                    `;
+                }
+
+                // Check auth to see if they can review
+                const role = localStorage.getItem('authRole');
+                if (role === 'seller') {
+                    // Sellers shouldn't leave reviews
+                    document.getElementById('reviewFormContainer').innerHTML = `<p style="color: var(--text-muted); padding: 2rem; border: 1px dashed var(--border-color); border-radius: 12px; text-align: center;"><em>You are logged in as a Seller. Please log in as a Customer to leave reviews.</em></p>`;
+                } else if (!role) {
+                    document.getElementById('reviewFormContainer').innerHTML = `
+                        <div style="text-align: center; padding: 2rem; border: 1px dashed var(--border-color); border-radius: 12px;">
+                            <p style="margin-bottom: 1rem; color: var(--text-muted);">Please log in to leave a review.</p>
+                            <a href="login.html" class="btn btn-primary">Login as Customer</a>
+                        </div>
+                    `;
+                }
+            } else {
+                document.getElementById('profileName').textContent = "Artist Not Found";
+            }
+        });
+
+        function submitReview(e) {
+            e.preventDefault();
+            const text = document.getElementById('reviewText').value;
+            const rating = parseInt(document.getElementById('reviewRating').value);
+            const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+
+            const list = document.getElementById('reviewsList');
+            const newReview = document.createElement('div');
+            newReview.className = 'review-card';
+            newReview.innerHTML = `
+                <div class="review-header">
+                    <strong>Logged-in Customer</strong>
+                    <span class="review-stars">${stars}</span>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">${text}</p>
+            `;
+
+            newReview.animate([{ opacity: 0, transform: 'translateY(-10px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 300 });
+            list.insertBefore(newReview, list.firstChild);
+            e.target.reset();
+        }
+    </script>
+</body>
+
+</html>

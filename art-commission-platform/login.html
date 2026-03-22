@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Artisan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: radial-gradient(circle at top, #1a1525, var(--bg-color));
+        }
+
+        .login-container {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .role-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .role-tab {
+            flex: 1;
+            padding: 1rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            font-weight: 500;
+        }
+
+        .role-tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .role-tab:not(.active):hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: #fff;
+            font-family: var(--font-family);
+            transition: var(--transition-smooth);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(109, 40, 217, 0.2);
+        }
+
+        .login-btn {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Form toggling */
+        #customerForm,
+        #sellerForm {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        #customerForm.active,
+        #sellerForm.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <a href="index.html" class="logo" style="margin-bottom: 2rem; display: block; font-size: 2rem;">Artisan.</a>
+
+        <div class="login-header">
+            <h1>Welcome Back</h1>
+            <p>Select your role to continue.</p>
+        </div>
+
+        <div class="role-tabs">
+            <div class="role-tab active" id="tabCustomer" onclick="switchTab('customer')">Customer</div>
+            <div class="role-tab" id="tabSeller" onclick="switchTab('seller')">Artist / Seller</div>
+        </div>
+
+        <!-- Customer Form -->
+        <form id="customerForm" class="active" onsubmit="event.preventDefault(); login('customer');">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" class="form-control" placeholder="shopper@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn btn-glow login-btn"
+                style="background: linear-gradient(135deg, #0ea5e9, #3b82f6)">Log In as Customer</button>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">
+                Don't have an account? <a href="#" style="color: var(--secondary-color);">Sign Up</a>
+            </p>
+        </form>
+
+        <!-- Seller Form -->
+        <form id="sellerForm" onsubmit="event.preventDefault(); login('seller');">
+            <div class="form-group">
+                <label>Artist Email</label>
+                <input type="email" class="form-control" placeholder="artist@studio.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn btn-glow login-btn">Log In to Artist Dashboard</button>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">
+                Want to sell on Artisan? <a href="#" style="color: var(--secondary-color);">Apply Now</a>
+            </p>
+        </form>
+
+    </div>
+
+    <script>
+        function switchTab(role) {
+            document.getElementById('tabCustomer').classList.remove('active');
+            document.getElementById('tabSeller').classList.remove('active');
+            document.getElementById('customerForm').classList.remove('active');
+            document.getElementById('sellerForm').classList.remove('active');
+
+            if (role === 'customer') {
+                document.getElementById('tabCustomer').classList.add('active');
+                document.getElementById('customerForm').classList.add('active');
+            } else {
+                document.getElementById('tabSeller').classList.add('active');
+                document.getElementById('sellerForm').classList.add('active');
+            }
+        }
+
+        function login(role) {
+            // Set mock auth state
+            localStorage.setItem('authRole', role);
+            if (role === 'seller') {
+                window.location.href = 'seller-dashboard.html';
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // On load, if URL has #seller, default to seller tab
+        if (window.location.hash === '#seller') {
+            switchTab('seller');
+        }
+    </script>
+</body>
+
+</html>
